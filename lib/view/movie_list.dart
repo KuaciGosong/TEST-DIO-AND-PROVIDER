@@ -21,37 +21,56 @@ class _MovieListPageState extends State<MovieListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Movie List'),
+        backgroundColor: Color(0xFF006BFF),
+        foregroundColor: Colors.white, // Warna foreground untuk AppBar
       ),
-      body: Consumer<MovieProvider>(
-        builder: (context, movieProvider, child) {
-          if (movieProvider.isLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
+      body: Container(
+        color: Color(0xFFBCF2F6), // Warna background
+        child: Consumer<MovieProvider>(
+          builder: (context, movieProvider, child) {
+            if (movieProvider.isLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-          if (movieProvider.movieList.isEmpty) {
-            return Center(child: Text('No Movies Available'));
-          }
+            if (movieProvider.movieList.isEmpty) {
+              return Center(child: Text('No Movies Available'));
+            }
 
-          return ListView.builder(
-            itemCount: movieProvider.movieList.length,
-            itemBuilder: (context, index) {
-              final movie = movieProvider.movieList[index];
-              return ListTile(
-                title: Text(movie.movie),
-                subtitle: Text('Rating: ${movie.rating}'),
-                onTap: () {
-                  // Navigasi ke halaman detail ketika item diklik
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MovieDetailPage(movie: movie),
+            return ListView.separated(
+              itemCount: movieProvider.movieList.length,
+              itemBuilder: (context, index) {
+                final movie = movieProvider.movieList[index];
+                return ListTile(
+                  title: Center( // Membuat rata tengah
+                    child: Text(
+                      movie.movie,
+                      style: TextStyle(color: Color(0xFF006BFF)), // Warna foreground
                     ),
-                  );
-                },
-              );
-            },
-          );
-        },
+                  ),
+                  subtitle: Center(
+                    child: Text(
+                      'Rating: ${movie.rating}',
+                      style: TextStyle(color: Color(0xFF006BFF)), // Warna foreground
+                    ),
+                  ),
+                  onTap: () {
+                    // Navigasi ke halaman detail ketika item diklik
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieDetailPage(movie: movie),
+                      ),
+                    );
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => Divider(
+                color: Color(0xFF006BFF), // Garis antar list
+                thickness: 1,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

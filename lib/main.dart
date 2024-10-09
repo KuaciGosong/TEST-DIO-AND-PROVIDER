@@ -7,7 +7,6 @@ import '../view/movie_list.dart';
 import '../view/user_list.dart';
 import '../view/profile.dart';
 
-
 void main() {
   runApp(
     MultiProvider(
@@ -38,41 +37,96 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Main Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MovieListPage()),
-                );
-              },
-              child: Text('Go to Movie List'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserListPage()),
-                );
-              },
-              child: Text('Go to User List'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()),
-                );
-              },
-              child: Text('Go to Profile'),
-            ),
-          ],
+      body: Container(
+        color: Color(0xFFBCF2F6), // Warna background
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150, // Lebar tombol
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MovieListPage()),
+                        );
+                      },
+                      icon: Icon(Icons.movie, color: Colors.white, size: 40), // Ukuran ikon film
+                      label: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Movie List',
+                            style: TextStyle(color: Colors.white, fontSize: 18), // Ukuran teks
+                          ),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF006BFF), // Warna tombol
+                        padding: EdgeInsets.symmetric(vertical: 20), // Padding vertikal
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20), // Spasi antar tombol
+                  SizedBox(
+                    width: 150, // Lebar tombol
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserListPage()),
+                        );
+                      },
+                      icon: Icon(Icons.people, color: Colors.white, size: 40), // Ukuran ikon pengguna
+                      label: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'User List',
+                            style: TextStyle(color: Colors.white, fontSize: 18), // Ukuran teks
+                          ),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF006BFF), // Warna tombol
+                        padding: EdgeInsets.symmetric(vertical: 20), // Padding vertikal
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20), // Spasi di atas tombol profil
+              SizedBox(
+                width: 150, // Lebar tombol
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                  icon: Icon(Icons.person, color: Colors.white, size: 40), // Ukuran ikon profil
+                  label: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Profile',
+                        style: TextStyle(color: Colors.white, fontSize: 18), // Ukuran teks
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF006BFF), // Warna tombol
+                    padding: EdgeInsets.symmetric(vertical: 20), // Padding vertikal
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
